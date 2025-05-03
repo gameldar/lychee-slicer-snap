@@ -1,0 +1,41 @@
+name: lychee-slicer
+base: core24
+version: '7.3.2'
+summary: Lychee Slicer
+description: |
+  Lychee Slicer provides a user-friendly interface and many powerful features that improve the slicing process.
+
+grade: stable
+confinement: strict
+
+parts:
+  lychee-slicer:
+    plugin: dump
+    source: https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-7.3.2.deb
+    stage-packages:
+      - libgtk-3-0
+      - libnotify4
+      - libnss3
+      - libxss1
+      - libxtst6
+      - xdg-utils
+      - libatspi2.0-0
+      - libuuid1
+      - libsecret-1-0
+      - libxshmfence1
+      - libproxy1v5
+    override-prime: |
+      craftctl default
+      chmod 4755 $HOME/prime/opt/LycheeSlicer/chrome-sandbox
+
+apps:
+  lychee-slicer:
+    extensions: [gnome]
+    command: opt/LycheeSlicer/lycheeslicer
+    plugs:
+      - home
+      - network
+      - network-bind
+      - userns
+      - steam-support
+      - network-control
