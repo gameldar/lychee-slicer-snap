@@ -27,11 +27,13 @@ parts:
     override-prime: |
       craftctl default
       chmod 4755 $HOME/prime/opt/LycheeSlicer/chrome-sandbox
+      sed -i -e 's#Icon=lycheeslicer#Icon=usr/share/icons/hicolor/512x512/apps/lycheeslicer.png#' $HOME/prime/usr/share/applications/lycheeslicer.desktop
 
 apps:
   lychee-slicer:
     extensions: [gnome]
     command: opt/LycheeSlicer/lycheeslicer
+    desktop: usr/share/applications/lycheeslicer.desktop
     plugs:
       - home
       - network
